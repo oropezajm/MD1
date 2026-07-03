@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistemas Numéricos - Introducción a las TI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chosen Palette: Slate & Azure (Fondo profesional #F8FAFC, acentos en azul corporativo #0284C7, gris pizarra #1E293B y blanco puro) -->
+    <!-- Application Structure Plan: SPA optimizada con navegación lateral. Se ha reestructurado la sección inicial para incluir la Introducción de TI, y se añaden módulos dedicados para Octal e Hexadecimal junto a una sección de Cuestionarios segmentada por pestañas (General, Decimal-Binario, Octal, Hexadecimal) con 5 preguntas interactivas por cada uno. -->
+    <!-- Visualization & Content Choices: 1. Introducción: Texto académico sobre TI. 2. Sistema Maya: Representación dinámica en Canvas API. 3. Sistema Romano: Motor de conversión aditivo-sustractivo. 4. Binario, Octal y Hexadecimal: Calculadoras dinámicas con tablas de divisiones sucesivas paso a paso. 5. Cuestionarios: Cuatro conjuntos de preguntas dinámicas con retroalimentaciones personalizadas. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            background-color: #F8FAFC;
+            color: #1E293B;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+        .nav-btn.active {
+            background-color: #0284C7;
+            color: white;
+            border-color: #0284C7;
+        }
+        .nav-btn {
+            transition: all 0.2s ease-in-out;
+        }
+        .nav-btn:hover:not(.active) {
+            background-color: #E2E8F0;
+        }
+        #maya-canvas {
+            background-color: #F1F5F9;
+            border-radius: 0.75rem;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .quiz-tab.active {
+            border-color: #0284C7;
+            color: #0284C7;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col md:flex-row">
+
+    <nav class="w-full md:w-64 bg-[#1E293B] shadow-xl md:min-h-screen flex flex-col md:fixed z-10">
+        <div class="p-6 border-b border-slate-700 bg-[#0284C7] text-white">
+            <h1 class="text-xl font-bold">Sistemas Numéricos</h1>
+            <p class="text-xs mt-1 opacity-80">Matemáticas Discretas I</p>
+        </div>
+        <div class="flex-1 px-4 py-6 space-y-2 flex md:flex-col gap-1 md:gap-0 flex-wrap justify-center overflow-y-auto">
+            <button onclick="navTo('intro')" id="btn-intro" class="nav-btn active w-full text-left px-4 py-3 rounded-lg font-semibold text-sm text-slate-300">Introducción</button>
+            <button onclick="navTo('maya')" id="btn-maya" class="nav-btn w-full text-left px-4 py-3 rounded-lg font-semibold text-sm text-slate-300">1. Sistema Maya</button>
+            <button onclick="navTo('romano')" id="btn-romano" class="nav-btn w-full text-left px-4 py-3 rounded-lg font-semibold text-sm text-slate-300">2. Sistema Romano</button>
+            <button onclick="navTo('binario')" id="btn-binario" class="nav-btn w-full text-left px-4 py-3 rounded-lg font-semibold text-sm text-slate-300">3. Decimal y Binario</button>
+            <button onclick="navTo('octal')" id="btn-octal" class="nav-btn w-full text-left px-4 py-3 rounded-lg font-semibold text-sm text-slate-300">4. Sistema Octal</button>
+            <button onclick="navTo('hexadecimal')" id="btn-hexadecimal" class="nav-btn w-full text-left px-4 py-3 rounded-lg font-semibold text-sm text-slate-300">5. Sistema Hexadecimal</button>
+            <button onclick="navTo('quiz')" id="btn-quiz" class="nav-btn w-full text-left px-4 py-3 rounded-lg font-semibold text-sm text-sky-400 bg-slate-800/50">Cuestionarios</button>
+        </div>
+    </nav>
+
+    <main class="flex-1 p-6 md:p-12 md:ml-64">
+        
+        <!-- INTRODUCCIÓN -->
+        <section id="sec-intro" class="max-w-4xl mx-auto space-y-8 block">
+            <div class="bg-white rounded-2xl p-10 shadow-sm border border-slate-100">
+                <h2 class="text-4xl font-extrabold mb-6 text-[#1E293B] tracking-tight border-b-4 border-[#0284C7] pb-2 inline-block">Introducción</h2>
+                
+                <div class="prose prose-slate max-w-none">
+                    <p class="text-gray-700 leading-relaxed mb-6 text-lg">
+                        En la era de la computación cuántica y la inteligencia artificial, los sistemas numéricos constituyen la base invisible pero vital de toda la infraestructura digital. Autores contemporáneos como <strong>Rosen (2020)</strong> y <strong>Stallings (2021)</strong> subrayan que el dominio de las bases binaria, octal y hexadecimal es una necesidad crítica para optimizar el almacenamiento de datos y la velocidad de procesamiento actual. 
+                    </p>
+                    <p class="text-gray-700 leading-relaxed mb-6 text-lg">
+                        El sistema binario permite la abstracción de voltajes en lógica discreta, mientras que el hexadecimal facilita la gestión de direcciones de memoria y protocolos de red avanzados como IPv6. Además, la representación de punto flotante es esencial para la precisión requerida en algoritmos de aprendizaje profundo (Deep Learning). Sin una comprensión profunda de estas estructuras, resulta imposible garantizar la integridad de la información en sistemas embebidos, la ciberseguridad o el desarrollo de software de alto rendimiento, donde cada bit gestionado correctamente impacta directamente en la eficiencia energética y operativa de las tecnologías modernas.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
+                    <div class="bg-slate-50 p-6 rounded-xl border border-slate-100">
+                        <h3 class="font-bold text-[#0284C7] mb-2 flex items-center">
+                            <span class="mr-2">⚡</span> Procesamiento
+                        </h3>
+                        <p class="text-sm text-slate-600">La lógica binaria, octal y hexadecimal define la arquitectura y direccionamiento en el CPU y memoria física.</p>
+                    </div>
+                    <div class="bg-slate-50 p-6 rounded-xl border border-slate-100">
+                        <h3 class="font-bold text-[#0284C7] mb-2 flex items-center">
+                            <span class="mr-2">🔒</span> Seguridad
+                        </h3>
+                        <p class="text-sm text-slate-600">El manejo de bases de datos binarias y de cifrado hexadecimal es la espina dorsal de la criptografía moderna.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SISTEMA MAYA -->
+        <section id="sec-maya" class="max-w-4xl mx-auto space-y-6 hidden">
+            <div class="bg-white rounded-2xl p-10 shadow-sm border border-slate-100">
+                <h2 class="text-3xl font-bold mb-4 text-slate-800">1. Sistema Maya (Vigesimal)</h2>
+                <p class="text-slate-600 mb-8">Sistema posicional vertical basado en potencias de 20. Utiliza el punto (1), la barra (5) y el caracol (0).</p>
+                
+                <div class="bg-slate-50 rounded-xl p-8 flex flex-col md:flex-row gap-10 items-center border border-slate-100">
+                    <div class="flex-1 w-full">
+                        <label class="block text-xs font-bold uppercase text-slate-500 mb-2">Ingresar valor Decimal:</label>
+                        <input type="number" id="maya-val" value="4305" min="0" max="159999" class="w-full border border-slate-200 rounded-lg p-3 text-xl font-bold mb-4 focus:ring-2 focus:ring-sky-500 outline-none">
+                        <button onclick="calcMaya()" class="w-full bg-[#0284C7] text-white py-3 rounded-lg font-bold shadow-md hover:bg-sky-700 transition">Visualizar Niveles</button>
+                        <div id="maya-info" class="mt-6 text-xs font-mono text-slate-700 space-y-2"></div>
+                    </div>
+                    <canvas id="maya-canvas" width="160" height="320"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- SISTEMA ROMANO -->
+        <section id="sec-romano" class="max-w-4xl mx-auto space-y-6 hidden">
+            <div class="bg-white rounded-2xl p-10 shadow-sm border border-slate-100">
+                <h2 class="text-3xl font-bold mb-4 text-slate-800">2. Sistema Romano (No Posicional)</h2>
+                <p class="text-slate-600 mb-8">Basado en reglas aditivas y sustractivas con símbolos fijos (I, V, X, L, C, D, M).</p>
+                
+                <div class="bg-slate-50 rounded-xl p-8 border border-slate-100">
+                    <div class="flex flex-col md:flex-row gap-4 mb-6">
+                        <input type="number" id="rom-val" value="2024" min="1" max="3999" class="flex-1 border border-slate-200 rounded-lg p-3 text-xl font-bold focus:ring-2 focus:ring-sky-500 outline-none">
+                        <button onclick="calcRom()" class="bg-slate-800 text-white px-8 py-3 rounded-lg font-bold hover:bg-black transition">Convertir</button>
+                    </div>
+                    <div id="rom-res" class="text-6xl font-serif text-center font-bold my-8 text-sky-600 tracking-widest"></div>
+                    <div id="rom-detail" class="text-center text-sm font-mono text-slate-500 bg-white p-4 rounded-lg border border-slate-100"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DECIMAL A BINARIO -->
+        <section id="sec-binario" class="max-w-4xl mx-auto space-y-6 hidden">
+            <div class="bg-white rounded-2xl p-10 shadow-sm border border-slate-100">
+                <h2 class="text-3xl font-bold mb-4 text-slate-800">3. Decimal a Binario (MD1_U1)</h2>
+                <p class="text-slate-600 mb-8">Aplicación del algoritmo de divisiones sucesivas para obtener la representación binaria.</p>
+                
+                <div class="bg-slate-50 rounded-xl p-8 border border-slate-100">
+                    <div class="flex flex-col md:flex-row gap-4 mb-8">
+                        <input type="number" id="bin-val" value="123" min="0" class="flex-1 border border-slate-200 rounded-lg p-3 text-xl font-bold focus:ring-2 focus:ring-sky-500 outline-none">
+                        <button onclick="calcBin()" class="bg-sky-600 text-white px-8 py-3 rounded-lg font-bold hover:bg-sky-700 transition">Calcular Bits</button>
+                    </div>
+                    <div class="overflow-hidden rounded-xl border border-slate-200 bg-white mb-6">
+                        <table class="w-full text-left">
+                            <thead class="bg-slate-100 text-slate-500 text-xs uppercase font-bold">
+                                <tr><th class="p-4">Operación</th><th class="p-4">Cociente</th><th class="p-4 text-sky-600">Residuo (Bit)</th></tr>
+                            </thead>
+                            <tbody id="bin-table" class="font-mono text-sm divide-y divide-slate-100"></tbody>
+                        </table>
+                    </div>
+                    <div id="bin-res" class="p-6 bg-slate-900 text-sky-400 text-center rounded-xl text-4xl font-mono shadow-inner tracking-tighter"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SISTEMA OCTAL -->
+        <section id="sec-octal" class="max-w-4xl mx-auto space-y-6 hidden">
+            <div class="bg-white rounded-2xl p-10 shadow-sm border border-slate-100">
+                <h2 class="text-3xl font-bold mb-4 text-slate-800">4. Sistema Octal (Base 8)</h2>
+                <p class="text-slate-600 mb-8">El sistema octal utiliza los dígitos del <strong>0 al 7</strong>. Es ampliamente estudiado en computación ya que permite empaquetar de forma directa cadenas de 3 bits binarios.</p>
+                
+                <div class="bg-slate-50 rounded-xl p-8 border border-slate-100 space-y-6">
+                    <div class="flex flex-col md:flex-row gap-4">
+                        <div class="flex-1">
+                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Decimal a Octal (Ej: 268):</label>
+                            <input type="number" id="oct-val" value="268" min="0" class="w-full border border-slate-200 rounded-lg p-3 text-lg font-bold focus:ring-2 focus:ring-sky-500 outline-none">
+                        </div>
+                        <div class="flex items-end">
+                            <button onclick="calcOct()" class="w-full md:w-auto bg-[#0284C7] text-white px-8 py-3.5 rounded-lg font-bold hover:bg-sky-700 transition">Convertir a Base 8</button>
+                        </div>
+                    </div>
+
+                    <div class="overflow-hidden rounded-xl border border-slate-200 bg-white">
+                        <table class="w-full text-left">
+                            <thead class="bg-slate-100 text-slate-500 text-xs uppercase font-bold">
+                                <tr><th class="p-4">Operación (División mod 8)</th><th class="p-4">Cociente</th><th class="p-4 text-sky-600">Residuo (Octal)</th></tr>
+                            </thead>
+                            <tbody id="oct-table" class="font-mono text-sm divide-y divide-slate-100"></tbody>
+                        </table>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="p-5 bg-slate-900 rounded-xl text-center">
+                            <span class="text-xs font-semibold text-slate-400 block mb-1">REPRESENTACIÓN OCTAL</span>
+                            <span id="oct-res" class="text-3xl font-mono font-bold text-sky-400"></span>
+                        </div>
+                        <div class="p-5 bg-slate-800 rounded-xl text-center">
+                            <span class="text-xs font-semibold text-slate-300 block mb-1">EQUIVALENTE BINARIO INDIRECTO (3 bits)</span>
+                            <span id="oct-bin-res" class="text-2xl font-mono font-bold text-green-400"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SISTEMA HEXADECIMAL -->
+        <section id="sec-hexadecimal" class="max-w-4xl mx-auto space-y-6 hidden">
+            <div class="bg-white rounded-2xl p-10 shadow-sm border border-slate-100">
+                <h2 class="text-3xl font-bold mb-4 text-slate-800">5. Sistema Hexadecimal (Base 16)</h2>
+                <p class="text-slate-600 mb-8">El sistema de base 16 añade los caracteres <strong>A, B, C, D, E y F</strong> para representar los valores del 10 al 15 respectivamente. Cada dígito hexadecimal se corresponde de manera exacta con una cadena de 4 bits binarios (nibble).</p>
+                
+                <div class="bg-slate-50 rounded-xl p-8 border border-slate-100 space-y-6">
+                    <div class="flex flex-col md:flex-row gap-4">
+                        <div class="flex-1">
+                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Decimal a Hexadecimal (Ej: 801, 268):</label>
+                            <input type="number" id="hex-val" value="801" min="0" class="w-full border border-slate-200 rounded-lg p-3 text-lg font-bold focus:ring-2 focus:ring-sky-500 outline-none">
+                        </div>
+                        <div class="flex items-end">
+                            <button onclick="calcHex()" class="w-full md:w-auto bg-[#0284C7] text-white px-8 py-3.5 rounded-lg font-bold hover:bg-sky-700 transition">Convertir a Base 16</button>
+                        </div>
+                    </div>
+
+                    <div class="overflow-hidden rounded-xl border border-slate-200 bg-white">
+                        <table class="w-full text-left">
+                            <thead class="bg-slate-100 text-slate-500 text-xs uppercase font-bold">
+                                <tr><th class="p-4">Operación (División mod 16)</th><th class="p-4">Cociente</th><th class="p-4 text-sky-600">Residuo (H)</th></tr>
+                            </thead>
+                            <tbody id="hex-table" class="font-mono text-sm divide-y divide-slate-100"></tbody>
+                        </table>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="p-5 bg-slate-900 rounded-xl text-center">
+                            <span class="text-xs font-semibold text-slate-400 block mb-1">REPRESENTACIÓN HEXADECIMAL</span>
+                            <span id="hex-res" class="text-3xl font-mono font-bold text-sky-400"></span>
+                        </div>
+                        <div class="p-5 bg-slate-800 rounded-xl text-center">
+                            <span class="text-xs font-semibold text-slate-300 block mb-1">EQUIVALENTE BINARIO INDIRECTO (4 bits)</span>
+                            <span id="hex-bin-res" class="text-2xl font-mono font-bold text-green-400"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN DE CUESTIONARIOS SEGMENTADOS -->
+        <section id="sec-quiz" class="max-w-4xl mx-auto space-y-6 hidden">
+            <div class="bg-white rounded-2xl p-10 shadow-sm border border-slate-100">
+                <h2 class="text-3xl font-bold mb-4 text-slate-800">Módulos de Autoevaluación</h2>
+                <p class="text-slate-600 mb-6">Selecciona una categoría para iniciar una prueba interactiva de 5 preguntas basada en los temas de Matemáticas Discretas.</p>
+                
+                <!-- Pestañas de Cuestionarios -->
+                <div class="flex border-b border-slate-200 mb-8 space-x-6 text-sm font-semibold overflow-x-auto whitespace-nowrap">
+                    <button onclick="switchQuizTab('general')" id="tab-general" class="quiz-tab active pb-3 border-b-2 border-transparent hover:text-slate-800">Cuestionario General</button>
+                    <button onclick="switchQuizTab('binario_quiz')" id="tab-binario_quiz" class="quiz-tab pb-3 border-b-2 border-transparent hover:text-slate-800">Cuestionario Decimal-Binario</button>
+                    <button onclick="switchQuizTab('octal')" id="tab-octal" class="quiz-tab pb-3 border-b-2 border-transparent hover:text-slate-800">Cuestionario Octal</button>
+                    <button onclick="switchQuizTab('hex')" id="tab-hex" class="quiz-tab pb-3 border-b-2 border-transparent hover:text-slate-800">Cuestionario Hexadecimal</button>
+                </div>
+
+                <!-- Caja del Cuestionario -->
+                <div id="quiz-box" class="space-y-8"></div>
+                
+                <div id="quiz-score-box" class="mt-10 p-8 bg-sky-50 rounded-2xl border border-sky-100 text-center hidden">
+                    <h3 class="text-2xl font-bold text-sky-900 mb-2">Resultado Final</h3>
+                    <p id="quiz-score-text" class="text-lg text-sky-700"></p>
+                    <button onclick="resetCurrentQuiz()" class="mt-6 bg-sky-600 text-white px-8 py-2 rounded-lg font-bold hover:bg-sky-700 transition">Reintentar</button>
+                </div>
+                
+                <div class="mt-10 text-center" id="quiz-btn-area">
+                    <button onclick="checkQuiz()" class="bg-slate-800 text-white px-10 py-4 rounded-xl font-extrabold hover:bg-black transition shadow-lg">Finalizar Intento</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // Configuración de Estados
+        const appState = {
+            view: 'intro',
+            quizActiveTab: 'general'
+        };
+
+        function navTo(sec) {
+            document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active', 'text-white'));
+            
+            document.getElementById(`sec-${sec}`).classList.remove('hidden');
+            document.getElementById(`btn-${sec}`).classList.add('active', 'text-white');
+
+            if(sec === 'maya') calcMaya();
+            if(sec === 'romano') calcRom();
+            if(sec === 'binario') calcBin();
+            if(sec === 'octal') calcOct();
+            if(sec === 'hexadecimal') calcHex();
+            if(sec === 'quiz') initQuiz();
+        }
+
+        // Lógica Sistema Maya
+        function calcMaya() {
+            let n = parseInt(document.getElementById('maya-val').value) || 0;
+            let levels = [];
+            let temp = n;
+            if(temp === 0) levels = [0];
+            else while(temp > 0){ levels.push(temp % 20); temp = Math.floor(temp / 20); }
+
+            let info = document.getElementById('maya-info');
+            info.innerHTML = '';
+            levels.slice().reverse().forEach((v, i) => {
+                let p = levels.length - 1 - i;
+                info.innerHTML += `<div>Nivel ${p+1} (20^${p}): ${v} &rarr; ${v * Math.pow(20, p)}</div>`;
+            });
+            drawMaya(levels);
+        }
+
+        function drawMaya(lvls) {
+            const canvas = document.getElementById('maya-canvas');
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const count = Math.max(4, lvls.length);
+            const h = canvas.height / count;
+
+            lvls.forEach((v, i) => {
+                let y = (count - 1 - i) * h + h/2;
+                if(v === 0) {
+                    ctx.beginPath(); ctx.ellipse(canvas.width/2, y, 20, 10, 0, 0, Math.PI*2);
+                    ctx.strokeStyle = '#1E293B'; ctx.lineWidth = 2; ctx.stroke();
+                } else {
+                    let bars = Math.floor(v / 5); let dots = v % 5;
+                    for(let b=0; b<bars; b++) { ctx.fillStyle='#1E293B'; ctx.fillRect(canvas.width/2-25, y+10-b*12, 50, 8); }
+                    let startX = canvas.width/2 - (dots-1)*10;
+                    for(let d=0; d<dots; d++) { ctx.beginPath(); ctx.arc(startX+d*20, y-10, 6, 0, Math.PI*2); ctx.fillStyle='#1E293B'; ctx.fill(); }
+                }
+                ctx.beginPath(); ctx.moveTo(10, (count-1-i)*h); ctx.lineTo(canvas.width-10, (count-1-i)*h); ctx.strokeStyle='#E2E8F0'; ctx.stroke();
+            });
+        }
+
+        // Lógica Romano
+        const romMap = [{v:1000,s:'M'},{v:900,s:'CM'},{v:500,s:'D'},{v:400,s:'CD'},{v:100,s:'C'},{v:90,s:'XC'},{v:50,s:'L'},{v:40,s:'XL'},{v:10,s:'X'},{v:9,s:'IX'},{v:5,s:'V'},{v:4,s:'IV'},{v:1,s:'I'}];
+        function calcRom() {
+            let n = parseInt(document.getElementById('rom-val').value) || 1;
+            let res = ''; let parts = []; let temp = n;
+            romMap.forEach(m => { while(temp >= m.v){ res += m.s; parts.push(`${m.s}(${m.v})`); temp -= m.v; } });
+            document.getElementById('rom-res').innerText = res;
+            document.getElementById('rom-detail').innerText = parts.join(' + ') + ' = ' + n;
+        }
+
+        // Lógica Binario
+        function calcBin() {
+            let n = parseInt(document.getElementById('bin-val').value) || 0;
+            let table = document.getElementById('bin-table');
+            let resDiv = document.getElementById('bin-res');
+            table.innerHTML = '';
+            if(n === 0){ table.innerHTML='<tr><td class="p-4">0 / 2</td><td class="p-4">0</td><td class="p-4">0</td></tr>'; resDiv.innerText='0'; return; }
+            let bits = []; let temp = n;
+            while(temp > 0){
+                let r = temp % 2; let q = Math.floor(temp / 2);
+                table.innerHTML += `<tr class="hover:bg-slate-50"><td class="p-4">${temp} / 2</td><td class="p-4">${q}</td><td class="p-4 font-bold text-sky-600">${r}</td></tr>`;
+                bits.push(r); temp = q;
+            }
+            resDiv.innerText = bits.reverse().join('');
+        }
+
+        // Lógica Sistema Octal (Base 8)
+        function calcOct() {
+            let n = parseInt(document.getElementById('oct-val').value) || 0;
+            let table = document.getElementById('oct-table');
+            let resDiv = document.getElementById('oct-res');
+            let binResDiv = document.getElementById('oct-bin-res');
+            table.innerHTML = '';
+            
+            if(n === 0){ 
+                table.innerHTML='<tr><td class="p-4">0 / 8</td><td class="p-4">0</td><td class="p-4 text-sky-600 font-bold">0</td></tr>'; 
+                resDiv.innerText='0'; 
+                binResDiv.innerText='000';
+                return; 
+            }
+
+            let octals = []; let temp = n;
+            while(temp > 0){
+                let r = temp % 8; let q = Math.floor(temp / 8);
+                table.innerHTML += `<tr class="hover:bg-slate-50"><td class="p-4">${temp} / 8</td><td class="p-4">${q}</td><td class="p-4 font-bold text-sky-600">${r}</td></tr>`;
+                octals.push(r); temp = q;
+            }
+            let octResult = octals.reverse().join('');
+            resDiv.innerText = octResult + "₈";
+
+            // Binario directo mapeado por cada carácter octal (3 bits)
+            let binaryMapping = octResult.split('').map(d => {
+                return parseInt(d).toString(2).padStart(3, '0');
+            }).join(' ');
+            binResDiv.innerText = binaryMapping;
+        }
+
+        // Lógica Sistema Hexadecimal (Base 16)
+        const hexChars = ['0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'];
+        function calcHex() {
+            let n = parseInt(document.getElementById('hex-val').value) || 0;
+            let table = document.getElementById('hex-table');
+            let resDiv = document.getElementById('hex-res');
+            let binResDiv = document.getElementById('hex-bin-res');
+            table.innerHTML = '';
+
+            if(n === 0){ 
+                table.innerHTML='<tr><td class="p-4">0 / 16</td><td class="p-4">0</td><td class="p-4 text-sky-600 font-bold">0</td></tr>'; 
+                resDiv.innerText='0'; 
+                binResDiv.innerText='0000';
+                return; 
+            }
+
+            let hexes = []; let temp = n;
+            while(temp > 0){
+                let r = temp % 16; let q = Math.floor(temp / 16);
+                let representation = r >= 10 ? `${hexChars[r]} (${r})` : `${r}`;
+                table.innerHTML += `<tr class="hover:bg-slate-50"><td class="p-4">${temp} / 16</td><td class="p-4">${q}</td><td class="p-4 font-bold text-sky-600">${representation}</td></tr>`;
+                hexes.push(hexChars[r]); temp = q;
+            }
+            let hexResult = hexes.reverse().join('');
+            resDiv.innerText = hexResult + "₁₆";
+
+            // Binario directo mapeado por cada carácter hex (4 bits)
+            let binaryMapping = hexResult.split('').map(char => {
+                let val = hexChars.indexOf(char);
+                return val.toString(2).padStart(4, '0');
+            }).join(' ');
+            binResDiv.innerText = binaryMapping;
+        }
+
+        // Datos de los Cuatro Cuestionarios
+        const quizzes = {
+            general: [
+                { q: "¿Por qué los sistemas numéricos son vitales en las TI según autores modernos?", a: ["Optimización de almacenamiento y velocidad de procesamiento.", "Porque permiten el uso de letras en matemáticas.", "Solo sirven para la historia antigua."], c: 0 },
+                { q: "En el sistema Maya, ¿qué representa el caracol?", a: ["El número 1", "El número 5", "El número 0 (Posicional)"], c: 2 },
+                { q: "¿Cuál es una limitación del sistema Romano?", a: ["No tiene base 10.", "Es no posicional y complejo para cálculos extensos.", "Usa letras en lugar de glifos."], c: 1 },
+                { q: "En la conversión Decimal a Binario, ¿qué representan los residuos?", a: ["Los bits del número final.", "El cociente de la división.", "La base del sistema."], c: 0 },
+                { q: "¿Qué sistema numérico es fundamental para gestionar direcciones de memoria e IPv6?", a: ["Decimal", "Hexadecimal", "Romano"], c: 1 }
+            ],
+            binario_quiz: [
+                { q: "¿Qué dígitos se utilizan en el sistema binario (base 2) para representar y procesar la información digital?", a: ["Únicamente los dígitos 0 y 1.", "Los dígitos 0, 1 y 2.", "Cualquier número entero sin signo.", "Los caracteres numéricos de la A a la F."], c: 0 },
+                { q: "Si convertimos el número decimal 123 a binario mediante divisiones sucesivas, ¿cuál es el residuo obtenido en la primera división (123 / 2)?", a: ["0", "1", "No tiene residuo.", "2"], c: 1 },
+                { q: "¿A qué número decimal equivale exactamente la cadena binaria 10011₂?", a: ["19", "17", "25", "11"], c: 0 },
+                { q: "¿Cuál es el peso o valor posicional (en base decimal) de la cuarta posición de derecha a izquierda (2³) en un número binario?", a: ["4", "8", "16", "32"], c: 1 },
+                { q: "De acuerdo con los ejercicios prácticos de conversión del documento MD1_U1, si convertimos el decimal 192 a binario, ¿cuál es el resultado correcto?", a: ["11000000₂", "10100000₂", "11100000₂", "10000000₂"], c: 0 }
+            ],
+            octal: [
+                { q: "¿Qué rango de dígitos utiliza el sistema Octal?", a: ["Del 0 al 8", "Del 1 al 8", "Del 0 al 7"], c: 2 },
+                { q: "Al realizar la conversión del decimal 268 a octal, ¿qué valor se obtiene?", a: ["414₈", "324₈", "400₈"], c: 0 },
+                { q: "¿Por qué el sistema octal se mapea tan eficientemente con el binario?", a: ["Porque la base 8 es divisible entre 2.", "Porque cada dígito octal representa exactamente 3 bits.", "Porque es un sistema que no usa decimales."], c: 1 },
+                { q: "Al mapear el número octal 727₈ a binario, ¿cuál es el resultado correcto?", a: ["111010111₂", "111000111₂", "110010110₂"], c: 0 },
+                { q: "¿Cuál es el peso de la segunda posición (de derecha a izquierda) en un número octal?", a: ["8^0 = 1", "8^1 = 8", "8^2 = 64"], c: 1 }
+            ],
+            hex: [
+                { q: "En el sistema hexadecimal, ¿qué letras representan del 10 al 15?", a: ["A, B, C, D, E, F", "X, Y, Z, W, U, V", "I, V, X, L, C, D"], c: 0 },
+                { q: "Si convertimos el decimal 801 a base hexadecimal, el resultado es:", a: ["321₁₆", "2D1₁₆", "1D7₁₆"], c: 0 },
+                { q: "Mapea el número hexadecimal 1D7₁₆ directamente a binario (4 bits por dígito):", a: ["111010111₂ (0001 1101 0111)", "101101111₂ (0001 1011 0111)", "111110111₂"], c: 0 },
+                { q: "Al convertir el número decimal 268 a hexadecimal, ¿qué valor resulta?", a: ["10C₁₆", "1BC₁₆", "10A₁₆"], c: 0 },
+                { q: "¿Cuál es el valor decimal de la letra 'D' en hexadecimal?", a: ["11", "13", "14"], c: 1 }
+            ]
+        };
+
+        function switchQuizTab(tabId) {
+            document.querySelectorAll('.quiz-tab').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`tab-${tabId}`).classList.add('active');
+            appState.quizActiveTab = tabId;
+            initQuiz();
+        }
+
+        function initQuiz() {
+            const box = document.getElementById('quiz-box');
+            box.innerHTML = '';
+            document.getElementById('quiz-score-box').classList.add('hidden');
+            document.getElementById('quiz-btn-area').classList.remove('hidden');
+
+            const activeQuestions = quizzes[appState.quizActiveTab];
+            
+            activeQuestions.forEach((d, i) => {
+                let html = `<div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm" id="q-row-${i}">
+                    <p class="font-bold text-slate-800 mb-4">${i+1}. ${d.q}</p>
+                    <div class="space-y-3">`;
+                d.a.forEach((opt, idx) => {
+                    html += `<label class="flex items-center p-4 border border-slate-100 rounded-lg cursor-pointer hover:bg-slate-50 transition">
+                        <input type="radio" name="q${i}" value="${idx}" class="w-4 h-4 text-sky-600 focus:ring-sky-500">
+                        <span class="ml-3 text-slate-700 font-medium">${opt}</span>
+                    </label>`;
+                });
+                html += `</div><div id="q-feedback-${i}" class="mt-4 p-3 rounded-lg text-sm hidden font-semibold"></div></div>`;
+                box.innerHTML += html;
+            });
+            window.quizReady = true;
+        }
+
+        function resetCurrentQuiz() {
+            initQuiz();
+        }
+
+        function checkQuiz() {
+            let score = 0;
+            const activeQuestions = quizzes[appState.quizActiveTab];
+
+            activeQuestions.forEach((d, i) => {
+                let sel = document.querySelector(`input[name="q${i}"]:checked`);
+                let fb = document.getElementById(`q-feedback-${i}`);
+                fb.classList.remove('hidden', 'bg-green-100', 'text-green-700', 'bg-red-100', 'text-red-700');
+                if(sel && parseInt(sel.value) === d.c) { 
+                    score++; 
+                    fb.classList.add('bg-green-100', 'text-green-700'); 
+                    fb.innerText = "¡Correcto!"; 
+                } else { 
+                    fb.classList.add('bg-red-100', 'text-red-700'); 
+                    fb.innerText = "Incorrecto. La respuesta era: " + d.a[d.c]; 
+                }
+            });
+            document.getElementById('quiz-score-box').classList.remove('hidden');
+            document.getElementById('quiz-score-text').innerText = `Calificación en este cuestionario: ${score} / ${activeQuestions.length}`;
+            document.getElementById('quiz-btn-area').classList.add('hidden');
+            document.getElementById('quiz-score-box').scrollIntoView({behavior:'smooth'});
+        }
+    </script>
+</body>
+</html>
