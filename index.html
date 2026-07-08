@@ -65,10 +65,10 @@
                 
                 <div class="prose prose-slate max-w-none">
                     <p class="text-gray-700 leading-relaxed mb-6 text-lg">
-                        En la era de la computación cuántica y la inteligencia artificial, los sistemas numéricos constituyen la base invisible pero vital de toda la infraestructura digital. Autores contemporáneos como <strong>Rosen (2020)</strong> y <strong>Stallings (2021)</strong> subrayan que el dominio de las bases binaria, octal y hexadecimal es una necesidad crítica para optimizar el almacenamiento de datos y la velocidad de procesamiento actual. 
+                        Los sistemas numéricos constituyen la base invisible pero vital de toda la infraestructura digital. Autores contemporáneos como <strong>Rosen (2020)</strong> y <strong>Stallings (2021)</strong> subrayan que el dominio de las bases binaria, octal y hexadecimal es una necesidad crítica para optimizar el almacenamiento de datos y la velocidad de procesamiento de datos. 
                     </p>
                     <p class="text-gray-700 leading-relaxed mb-6 text-lg">
-                        El sistema binario permite la abstracción de voltajes en lógica discreta, mientras que el hexadecimal facilita la gestión de direcciones de memoria y protocolos de red avanzados como IPv6. Además, la representación de punto flotante es esencial para la precisión requerida en algoritmos de aprendizaje profundo (Deep Learning). Sin una comprensión profunda de estas estructuras, resulta imposible garantizar la integridad de la información en sistemas embebidos, la ciberseguridad o el desarrollo de software de alto rendimiento, donde cada bit gestionado correctamente impacta directamente en la eficiencia energética y operativa de las tecnologías modernas.
+                        El sistema binario se asocia con sistemas de señales discretos, mientras que el hexadecimal facilita la gestión de direcciones de memoria y protocolos de red avanzados como IPv6. La habilidad para convertir numeros entre diferentes sistmas numericos es fundamental para el diseño de hardware y el procesamiento digital de señales.
                     </p>
                 </div>
 
@@ -83,7 +83,7 @@
                         <h3 class="font-bold text-[#0284C7] mb-2 flex items-center">
                             <span class="mr-2">🔒</span> Seguridad
                         </h3>
-                        <p class="text-sm text-slate-600">El manejo de bases de datos binarias y de cifrado hexadecimal es la espina dorsal de la criptografía moderna.</p>
+                        <p class="text-sm text-slate-600">El manejo de bases de datos binarias y de cifrado hexadecimal es la base de la criptografía moderna.</p>
                     </div>
                 </div>
             </div>
@@ -93,7 +93,7 @@
         <section id="sec-maya" class="max-w-4xl mx-auto space-y-6 hidden">
             <div class="bg-white rounded-2xl p-10 shadow-sm border border-slate-100">
                 <h2 class="text-3xl font-bold mb-4 text-slate-800">1. Sistema Maya (Vigesimal)</h2>
-                <p class="text-slate-600 mb-8">Sistema posicional vertical basado en potencias de 20. Utiliza el punto (1), la barra (5) y el caracol (0).</p>
+                <p class="text-slate-600 mb-8">Sistema posicional vertical  basado en potencias de 20. Utiliza el punto (1), la barra (5) y el caracol (0).</p>
                 
                 <div class="bg-slate-50 rounded-xl p-8 flex flex-col md:flex-row gap-10 items-center border border-slate-100">
                     <div class="flex-1 w-full">
@@ -127,8 +127,9 @@
         <!-- DECIMAL A BINARIO -->
         <section id="sec-binario" class="max-w-4xl mx-auto space-y-6 hidden">
             <div class="bg-white rounded-2xl p-10 shadow-sm border border-slate-100">
-                <h2 class="text-3xl font-bold mb-4 text-slate-800">3. Decimal a Binario (MD1_U1)</h2>
-                <p class="text-slate-600 mb-8">Aplicación del algoritmo de divisiones sucesivas para obtener la representación binaria.</p>
+                <h2 class="text-3xl font-bold mb-4 text-slate-800">3. Decimal a Binario</h2>
+                <p class="text-slate-600 mb-8">El sistema binario es posicional y tiene como base el 2, se representa unicamente dos digitos (0 y 1)</p>
+                <p class="text-slate-600 mb-8">Para realizar conversiones se utiliza el algoritmo de divisiones sucesivas entre un numero decimal y el 2 para obtener la representación binaria</p>
                 
                 <div class="bg-slate-50 rounded-xl p-8 border border-slate-100">
                     <div class="flex flex-col md:flex-row gap-4 mb-8">
@@ -152,7 +153,8 @@
         <section id="sec-octal" class="max-w-4xl mx-auto space-y-6 hidden">
             <div class="bg-white rounded-2xl p-10 shadow-sm border border-slate-100">
                 <h2 class="text-3xl font-bold mb-4 text-slate-800">4. Sistema Octal (Base 8)</h2>
-                <p class="text-slate-600 mb-8">El sistema octal utiliza los dígitos del <strong>0 al 7</strong>. Es ampliamente estudiado en computación ya que permite empaquetar de forma directa cadenas de 3 bits binarios.</p>
+                <p class="text-slate-600 mb-8">El sistema octal es posicional utiliza como base el numero 8, del <strong>0 al 7</strong>. Es utilizado en computación ya que permite empaquetar de forma directa cadenas de 3 bits binarios.</p>
+                <p class="text-slate-600 mb-8">Para realizar conversiones se utiliza el algoritmo de divisiones sucesivas entre un numero decimal y el 8, el residuo representa el valor octal</p>
                 
                 <div class="bg-slate-50 rounded-xl p-8 border border-slate-100 space-y-6">
                     <div class="flex flex-col md:flex-row gap-4">
@@ -192,7 +194,8 @@
         <section id="sec-hexadecimal" class="max-w-4xl mx-auto space-y-6 hidden">
             <div class="bg-white rounded-2xl p-10 shadow-sm border border-slate-100">
                 <h2 class="text-3xl font-bold mb-4 text-slate-800">5. Sistema Hexadecimal (Base 16)</h2>
-                <p class="text-slate-600 mb-8">El sistema de base 16 añade los caracteres <strong>A, B, C, D, E y F</strong> para representar los valores del 10 al 15 respectivamente. Cada dígito hexadecimal se corresponde de manera exacta con una cadena de 4 bits binarios (nibble).</p>
+                <p class="text-slate-600 mb-8">El sistema de base 16 utiliza los caracteres <strong>A, B, C, D, E y F</strong> para representar los valores del 10 al 15 respectivamente. Cada dígito hexadecimal se corresponde de manera exacta con una cadena de 4 bits binarios (nibble).</p>
+                <p class="text-slate-600 mb-8">Para realizar conversiones se utiliza el algoritmo de divisiones sucesivas entre un numero decimal y 16 para obtener la representación hexadecimal</p>
                 
                 <div class="bg-slate-50 rounded-xl p-8 border border-slate-100 space-y-6">
                     <div class="flex flex-col md:flex-row gap-4">
@@ -414,30 +417,30 @@
         // Datos de los Cuatro Cuestionarios
         const quizzes = {
             general: [
-                { q: "¿Por qué los sistemas numéricos son vitales en las TI según autores modernos?", a: ["Optimización de almacenamiento y velocidad de procesamiento.", "Porque permiten el uso de letras en matemáticas.", "Solo sirven para la historia antigua."], c: 0 },
-                { q: "En el sistema Maya, ¿qué representa el caracol?", a: ["El número 1", "El número 5", "El número 0 (Posicional)"], c: 2 },
-                { q: "¿Cuál es una limitación del sistema Romano?", a: ["No tiene base 10.", "Es no posicional y complejo para cálculos extensos.", "Usa letras en lugar de glifos."], c: 1 },
+                { q: "¿Por qué los sistemas numéricos son vitales en las TI según autores modernos?", a: ["Optimización de almacenamiento y velocidad de procesamiento.", "Porque permiten el uso de letras en matemáticas.", "Son parte de la historia antigua."], c: 0 },
+                { q: "¿Cual es la base del sistema numerico Maya?", a: ["El número 1", "El número 5", "El número 20"], c: 2 },
+                { q: "¿Cuál es una limitación del sistema Romano?", a: ["No tiene base 10.", "Es no posicional y complejo para cálculos extensos.", "Usa letras en lugar de glifos (simblos)."], c: 1 },
                 { q: "En la conversión Decimal a Binario, ¿qué representan los residuos?", a: ["Los bits del número final.", "El cociente de la división.", "La base del sistema."], c: 0 },
                 { q: "¿Qué sistema numérico es fundamental para gestionar direcciones de memoria e IPv6?", a: ["Decimal", "Hexadecimal", "Romano"], c: 1 }
             ],
             binario_quiz: [
-                { q: "¿Qué dígitos se utilizan en el sistema binario (base 2) para representar y procesar la información digital?", a: ["Únicamente los dígitos 0 y 1.", "Los dígitos 0, 1 y 2.", "Cualquier número entero sin signo.", "Los caracteres numéricos de la A a la F."], c: 0 },
+                { q: "¿Qué dígitos se utilizan en el sistema binario (base 2) para representar y procesar la información digital?", a: ["Únicamente los dígitos 0 y 1.", "Los dígitos 0, 1 y 2.", "El numero 2.", "Cualquier numero decimal"], c: 0 },
                 { q: "Si convertimos el número decimal 123 a binario mediante divisiones sucesivas, ¿cuál es el residuo obtenido en la primera división (123 / 2)?", a: ["0", "1", "No tiene residuo.", "2"], c: 1 },
                 { q: "¿A qué número decimal equivale exactamente la cadena binaria 10011₂?", a: ["19", "17", "25", "11"], c: 0 },
                 { q: "¿Cuál es el peso o valor posicional (en base decimal) de la cuarta posición de derecha a izquierda (2³) en un número binario?", a: ["4", "8", "16", "32"], c: 1 },
-                { q: "De acuerdo con los ejercicios prácticos de conversión del documento MD1_U1, si convertimos el decimal 192 a binario, ¿cuál es el resultado correcto?", a: ["11000000₂", "10100000₂", "11100000₂", "10000000₂"], c: 0 }
+                { q: "De acuerdo con los ejercicios prácticos de conversión, si convertimos el decimal 192 a binario, ¿cuál es el resultado correcto?", a: ["11000000₂", "10100000₂", "11100000₂", "10000000₂"], c: 0 }
             ],
             octal: [
                 { q: "¿Qué rango de dígitos utiliza el sistema Octal?", a: ["Del 0 al 8", "Del 1 al 8", "Del 0 al 7"], c: 2 },
                 { q: "Al realizar la conversión del decimal 268 a octal, ¿qué valor se obtiene?", a: ["414₈", "324₈", "400₈"], c: 0 },
-                { q: "¿Por qué el sistema octal se mapea tan eficientemente con el binario?", a: ["Porque la base 8 es divisible entre 2.", "Porque cada dígito octal representa exactamente 3 bits.", "Porque es un sistema que no usa decimales."], c: 1 },
-                { q: "Al mapear el número octal 727₈ a binario, ¿cuál es el resultado correcto?", a: ["111010111₂", "111000111₂", "110010110₂"], c: 0 },
-                { q: "¿Cuál es el peso de la segunda posición (de derecha a izquierda) en un número octal?", a: ["8^0 = 1", "8^1 = 8", "8^2 = 64"], c: 1 }
+                { q: "¿Por qué el sistema octal se considera tan eficientemente para representar valores binario?", a: ["Porque la base 8 es divisible entre 2.", "Porque cada dígito octal representa exactamente 3 bits.", "Porque es un sistema que no usa decimales."], c: 1 },
+                { q: "Al convertir el número octal 727₈ a binario, ¿cuál es el resultado correcto?", a: ["111010111₂", "111000111₂", "110010110₂"], c: 0 },
+                { q: "¿Cuál es la potencia de la segunda posición (de derecha a izquierda) en un número octal?", a: ["8^0 = 1", "8^1 = 8", "8^2 = 64"], c: 1 }
             ],
             hex: [
-                { q: "En el sistema hexadecimal, ¿qué letras representan del 10 al 15?", a: ["A, B, C, D, E, F", "X, Y, Z, W, U, V", "I, V, X, L, C, D"], c: 0 },
+                { q: "En el sistema hexadecimal, ¿qué letras representan del 10 al 15?", a: ["A, B, C, D, E, F", "H, E, X, A, D, C", "AA-FF"], c: 0 },
                 { q: "Si convertimos el decimal 801 a base hexadecimal, el resultado es:", a: ["321₁₆", "2D1₁₆", "1D7₁₆"], c: 0 },
-                { q: "Mapea el número hexadecimal 1D7₁₆ directamente a binario (4 bits por dígito):", a: ["111010111₂ (0001 1101 0111)", "101101111₂ (0001 1011 0111)", "111110111₂"], c: 0 },
+                { q: "La representacion el número hexadecimal 1D7₁₆ directamente a binario (4 bits por dígito):", a: ["111010111₂ (0001 1101 0111)", "101101111₂ (0001 1011 0111)", "111110111₂"], c: 0 },
                 { q: "Al convertir el número decimal 268 a hexadecimal, ¿qué valor resulta?", a: ["10C₁₆", "1BC₁₆", "10A₁₆"], c: 0 },
                 { q: "¿Cuál es el valor decimal de la letra 'D' en hexadecimal?", a: ["11", "13", "14"], c: 1 }
             ]
